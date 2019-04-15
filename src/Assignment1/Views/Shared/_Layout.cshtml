@@ -1,0 +1,103 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <!-- Bootstrap core CSS -->
+    <!-- Custom styles for this template -->
+
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/navbar-fixed-top.css" rel="stylesheet" />
+    <!--<link href="~/css/site.css" rel="stylesheet" />-->
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+
+    <div class="container-fluid">
+
+        <header>
+
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/Home/">My Blog</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+
+                            @if (Context.Session.GetString("FirstName") == null || Context.Session.GetString("FirstName").Count() == 0)
+
+                            { <!--if its not logged in-->
+
+                                <li class="active"><a href="/Home/index">Home</a></li>
+                                <li><a href="/Home/Register">Create Account</a></li>
+                                <li><a href="/Home/Login">Login</a></li>
+
+                            }
+                            else
+                            { <!--Else if its loggedin-->
+
+                                <li class="active"><a href="/Home/index">Home</a></li>
+
+                                <li> <a asp-controller="Home" asp-action="EditProfile" asp-route-id="@Context.Session.GetInt32("UserId")">Edit Profile </a></li>
+                                <li><a href="/Home/ViewBadWords">View Bad Words</a></li>
+
+                                @if (@Context.Session.GetInt32("RoleId") == 1)
+                                {
+                                     <!--Only if the user is addministrator-->
+                                    <li><a href="/Home/AddBlogPost">Create Blog</a></li>
+                                }
+
+                                <li><a onclick="return confirm('Are you sure to logout?');" asp-controller="Home" asp-action="Logout">Logout</a> </li>
+                            }
+
+
+
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+
+        </header>
+        <div>
+            <div id="middle" class="container-fluid text-center">
+                <h2 class="text-center">@Context.Session.GetString("FirstName") @Context.Session.GetString("LastName")</h2>
+                @RenderBody()
+
+            </div>
+        </div>
+
+
+        <footer>
+            <div class="footer">
+                <div class="panel-footer">
+                    <div id="bottom" class="jumbotron text-center">
+                        <h4> © 2017 - Ambaiowei Charles </h4><br />
+                        <h5>
+                            <i>
+                                <b>Email: </b> <a href="amba0013@algonquinlive.com"> amba0013@algonquinlive.com</a> <br />
+                                <b>Student Number: </b> 040 753 059 <br />
+
+                            </i>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+    </div>
+</body>
+</html>
+
+

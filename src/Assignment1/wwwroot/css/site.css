@@ -1,0 +1,76 @@
+﻿body {
+	min-height: 1700px;
+	padding-top: 70px;
+	background-color: white;
+}
+
+.jumbotron {
+	height: 550px;
+	color: red;
+}
+
+#top {
+	background-color: #ED2B2B;
+	color: white;
+	line-height: 21px;
+	padding-top: 150px;
+}
+
+#middle {
+	background-color: #EAD9D9;
+	color: black;
+	padding-top: 150px;
+}
+
+#middlePost {
+	background-color: #EAD9D9;
+	color: black;
+}
+
+#bottom {
+	background-color: #ED2B2B;
+	color: white;
+}
+
+.postContent {
+	margin: 0 auto;
+	width: 60%;
+}
+
+#header {
+	height: 90px;
+	color: white;
+	text-align: center;
+	position: static;
+	font-size: 7ex;
+	color: white;
+}
+
+div.Signin {
+	height: 10em;
+	display: flex;
+	align-items: center;
+	justify-content: left;
+	float: right;
+	margin-right: 50px;
+	margin-top: 60px;
+	color: white;
+}
+
+div.Signup {
+	height: 10em;
+	display: flex;
+	align-items: center;
+	justify-content: left;
+	float: left;
+	margin-left: 50px;
+	margin-top: 60px;
+	color: white;
+}
+
+.image #image {
+	height: 500px;
+	background: #515151;
+	color: white;
+	min-height: 700px;
+}

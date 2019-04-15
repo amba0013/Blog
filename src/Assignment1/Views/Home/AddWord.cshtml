@@ -1,0 +1,18 @@
+﻿@model Assignment1.Models.BadWord
+@{
+    Layout = "_Layout";
+}
+<br />
+<br />
+<br />
+<div class="container">
+    <form asp-controller="Home" asp-action="AddBadWordTOList" method="post">
+        <h4><label>Add A Word to Ban:</label></h4>
+        <input type="text" placeholder="Add Word" asp-for="Word" />  
+        <input type="submit" placeholder="Submit" />
+    </form>
+
+    <br />
+    <br />
+    <br />
+    </div>

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Assignment1.Models.BlogPost>
+@using Microsoft.AspNetCore.Http;
+
+@{
+    Layout = "_Layout";
+}
+
+<html>
+
+<body>
+    <div>
+
+    @if (Model == null || Model.Count() == 0)
+    {
+        <h4>Currently, there are no Blogs to display.</h4>
+    }
+    else
+    {
+        <div class="container">
+
+        <table style="width: 100%;">
+            @foreach (var item in Model)
+                {
+
+                    <tr>
+
+                        <td>
+                            <a asp-controller="Home" asp-action="DisplayFullBlogPost" asp-route-id="@item.BlogPostId">@item.Title</a><br />
+                        </td>
+
+                        <td>
+                            @item.ShortDescription <br />
+                        </td>
+
+                        <td>
+                            <br />@item.Posted <br /><br />
+                        </td>
+                    </tr>
+                    <!--Let Only the administrators edit or delete-->
+                    @if (@Context.Session.GetInt32("RoleId") == 1)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-controller="Home" asp-action="EditBlogPost" asp-route-id="@item.BlogPostId">Edit Blog</a> Or
+                                <a onclick="return confirm('Are you sure?');" asp-controller="Home" asp-action="DeleteBlog" asp-route-id="@item.BlogPostId">Delete Blog</a> <br /><br /><br />
+                            </td>
+                        </tr>
+                    }
+
+                }
+            </table>
+        </div>
+    }
+    </div>
+</body>
+</html>

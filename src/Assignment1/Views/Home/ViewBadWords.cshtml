@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model IEnumerable<Assignment1.Models.BadWord>
+
+@{
+    //recieves list of all the bad words just like the index view.  refer it back to that view.
+    //each one there's delete beside it
+    //at the bottom it lets you add one to the list.
+    Layout = "_Layout";
+
+}
+
+
+<html>
+<body>
+    <div class="container">
+        <br /><br />
+        <h2><a href="/Home/AddWord">Click here to add a new bad word</a></h2>
+
+        @if (Model == null || Model.Count() == 0)
+        {
+            <h4>Currently, there are no bad words to display.</h4>
+        }
+        else
+        {
+            <br />
+            <h4>Here is all bad words in the database.</h4>
+            <br />
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Words</th>
+                        @if (@Context.Session.GetInt32("RoleId") == 1)
+                        {
+                            <th>Delete</th>
+                        }
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                @item.Word
+                            </td>
+                            @if (@Context.Session.GetInt32("RoleId") == 1)
+                            {
+                                <td>
+                                    <a onclick="return confirm('Are you sure you want to delete this word?');" asp-controller="Home" asp-action="DeleteBadword" asp-route-id="@item.BadWordId">Delete This Bad Word</a> <br /><br />
+                                </td>
+                            }
+                        </tr>
+                    </tbody>
+
+                }
+            </table>
+
+
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+﻿@model Assignment1.Models.BlogPost
+
+@{
+    Layout = "_Layout";
+
+}
+
+<div class="container">
+    <h3>Adding Blog</h3> <br />
+    <form asp-controller="Home" asp-action="CreateBlog" method="post"  style="height:1000px; width:700px">
+        <div class="form-group">
+            <label for="Title:">Title</label>
+            <input type="text" class="form-control" asp-for="Title" placeholder="Title" />
+        </div>
+        <div class="form-group">
+            <label for="LastName">Posted</label>
+            <input type="date" class="form-control" asp-for="Posted" placeholder="Posted Date" />
+        </div>
+
+        <div class="form-group">
+            <label for="shortDescription">Short Description</label>
+            <textarea class="form-control" asp-for="ShortDescription" id="shortDiscription" placeholder="Short Description"> </textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="comment">Content</label>
+            <textarea class="form-control" asp-for="Content" rows="7" id="comment" placeholder="Content goes here"> </textarea>
+        </div>
+
+        <div class="form-group">
+            <label>IsAvailable</label>
+            <input type="checkbox" id="isAvailable" class="form-control" asp-for="IsAvailable" />
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Add Blog" />
+        </div>
+
+    </form>
+
+</div>

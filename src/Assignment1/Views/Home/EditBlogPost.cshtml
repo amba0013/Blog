@@ -1,0 +1,49 @@
+﻿@model Assignment1.Models.BlogPost
+@{
+    Layout = "_Layout";
+}
+<h3>Editing This Blog</h3> <br />
+<form asp-controller="Home" asp-action="ModifyBlog" style="height:500px; width:500px">
+    <input type="hidden" value="@Model.BlogPostId" name="BlogPostId" />
+    <div class="form-group">
+        <label for="Title:">Title</label>
+        <input type="text" class="form-control" asp-for="Title" />
+    </div>
+    <div class="form-group">
+        <label for="posted">Posted</label>
+        <input type="date" class="form-control" asp-for="Posted" />
+    </div>
+
+    <div class="form-group">
+        <label for="ShortDescription">Short Description</label>
+        <input type="text" class="form-control" asp-for="ShortDescription" />
+    </div>
+
+    <div class="form-group">
+        <label for="comment">Content</label>
+        <textarea class="form-control" asp-for="Content" rows="7" id="comment"> </textarea>
+    </div>
+
+    <div class="checkbox">
+        <label><input type="checkbox" asp-for="IsAvailable" id="isAvailable"> IsAvailable</label>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Modify Blog" />
+    </div>
+
+</form>
+<br /><br /><br />
+<form asp-controller="Home" asp-action="UploadFileNow" enctype="multipart/form-data">
+    <input type="hidden" value="@Model.BlogPostId" name="BlogPostId" />
+    <table>
+        <tr>
+            <td><h3><label>Upload a file</label></h3></td>
+        </tr>
+        <tr>
+            <td><input type="file" name="files" /></td>
+            <td><button name="upload">Upload Now</button></td>
+        </tr>
+    </table>
+
+</form>

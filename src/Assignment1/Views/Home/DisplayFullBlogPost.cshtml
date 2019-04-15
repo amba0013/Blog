@@ -1,0 +1,120 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+@model Assignment1.Models.BlogPostVM
+
+@{
+    Layout = "_Layout";
+
+}
+<div class="container">
+    <h3>Displaying The Full Blog Post</h3> <br />
+    <div class="form-group">
+        <table>
+            <tr>
+                <td>
+                    <b>@Model.BlogPost.Title</b>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br /><p><h5>@Model.BlogPost.Content</h5></p> <br /><br />
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Posted on: @Model.BlogPost.Posted <br /></b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>By: @Context.Session.GetString("FirstName")  @Context.Session.GetString("LastName") </b>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Bloger email: @Context.Session.GetString("Email")</b> <br /><br /><br />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+
+
+
+
+    <div class="detailBox" style="width:1000px">
+        <div class="titleBox">
+            <label>Comment Box</label>
+            <button type="button" class="close" aria-hidden="true">&times;</button>
+        </div>
+
+        <div class="commentBox">
+            <p class="taskDescription">This a comment box. This will display all the comments and also will let to you to add comments if you're logged in.</p>
+        </div>
+
+        <div class="actionBox">
+            <ul class="commentList">
+                @foreach (var comment in Model.Comments)
+            {
+                    <li>
+                        <div class="commenterImage">
+                            <img src="http://placekitten.com/50/50" />
+                        </div>
+                        <div class="commentText">
+                            <p class=""><em>@comment.Content</em><br /><br /></p> <span class="date sub-text"> on Dec 13th, 2016</span>
+                        </div>
+                    </li>
+                }
+            </ul>
+
+
+            @if (@Context.Session.GetString("FirstName") != null)
+            {
+
+                <form class="form-inline" role="form" asp-controller="Home" asp-action="Comment" method="post">
+                    <input type="hidden" value="@Model.BlogPost.BlogPostId" name="BlogPostId" /> <!--takes an id. And it works-->
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="comment" placeholder="Your comments" />
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-default">Add</button>
+                    </div>
+                </form>
+
+            }
+        </div>
+    </div>
+    <h4>Currently Uploaded Images that associated with this blog post. </h4>
+
+    @if (Model.Photos.Count() == 0 || Model.Photos == null)
+    {
+        <p>There are no files to display.</p>
+    }
+    else
+    {
+        <table>
+            @foreach (var photo in Model.Photos)
+                {
+                <tr>
+
+                    <td>
+                        <img src="@photo.Url" style="max-width: 400px;" />
+                        <br />
+                        @photo.FileName
+                        <hr />
+                    </td>
+                    @if (@Context.Session.GetInt32("RoleId") == 1)
+                    {
+                        <td>
+                            <a onclick="return confirm('Are you sure?');" asp-controller="Home" asp-action="DeletePhoto" asp-route-id="@photo.PhotoId">Delete Image</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+    }
+</div>
